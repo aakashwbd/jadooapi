@@ -7,13 +7,15 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Auth;
+use App\Models\Profile;
 
 
 class AuthController extends Controller
 {
      public function __construct()
     {
-        $this->middleware(['auth:sanctum'], ['only' => ['logout', 'me']]);
+        $this->middleware(['auth:sanctum'], ['only' => ['logout', 'me', 'update']]);
     }
 
     public function login()
@@ -55,15 +57,14 @@ class AuthController extends Controller
         }
     }
 
-    public function register($request)
+    public function register()
 
     {
-        dd($request->all());
         $validator = Validator::make(request()->all(), [
-            'name' => 'required',
+            'username' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
-//            'phone' => 'required',
+
         ]);
 
         if ($validator->fails()) {
@@ -75,12 +76,19 @@ class AuthController extends Controller
 
         try {
             $user = User::create([
-                'name' => request('name'),
+                'username' => request('username'),
                 'email' => request('email'),
                 'password' => Hash::make(request('password')),
             ]);
 
+            if ($user) {
+                $profile = Profile::create([
+                    "user_id" => $user->id 
+                    
+                ]);
+            }
 
+        
             return response([
                 'status' => 'done',
                 'message' => 'Successfully registered...'
@@ -94,7 +102,35 @@ class AuthController extends Controller
             ]);
         }
     }
-
+    public function update(){
+        try{
+            $userId = Auth::id();
+            
+            $profile = Profile::where('user_id', $userId)->first();
+            
+            $profile->name = request('name') ?? $profile->name;
+            $profile->dob = request('dob') ?? $profile->dob;
+            $profile->bloodGroup = request('bloodGroup') ?? $profile->bloodGroup;
+            $profile->maritialStatus = request('maritialStatus') ?? $profile->maritialStatus;
+            $profile->nationality = request('nationality') ?? $profile->nationality;
+            $profile->nid = request('nid') ?? $profile->nid;
+            $profile->birthCertificate = request('birthCertificate') ?? $profile->birthCertificate;
+            $profile->passport = request('passport') ?? $profile->passport;
+            
+            $profile->update();
+            
+            
+            return response([
+                'status' => 'success',
+                'message' => 'Profile updated successfully'
+            ]);
+        }catch(Exception $e){
+            return response([
+                'status' => 'serverError',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
     public function logout()
     {
         try {
@@ -116,7 +152,7 @@ class AuthController extends Controller
         try {
             return response([
                 'status' => 'done',
-                'data' => auth()->user()
+                'data' => auth()->user()->load('profile')
             ], 200);
         } catch (Exception $e) {
             return response([

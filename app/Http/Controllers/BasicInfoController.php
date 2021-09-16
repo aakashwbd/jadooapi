@@ -28,6 +28,7 @@ class BasicInfoController extends Controller
             }
          
            $basicInfo = BasicInfo::create([
+               
            "name" => request('name'),
            "dob" => request('dob'),
            "bloodGroup" => request('bloodGroup'),
@@ -65,11 +66,11 @@ class BasicInfoController extends Controller
         }
     }
 
-    public function show(){
-        $allBasicInfo = BasicInfo::all()->get();
-        return response([
-            'status' => 'success',
-            'data' =>  $allBasicInfo
-        ]);
-    }
+    // public function show(){
+    //     $allBasicInfo = BasicInfo::all()->get();
+    //     return response([
+    //         'status' => 'success',
+    //         'data' =>  $allBasicInfo
+    //     ]);
+    // }
 }

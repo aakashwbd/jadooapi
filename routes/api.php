@@ -21,6 +21,7 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 
 Route::get('/auth/me', [AuthController::class, 'me']);
+Route::patch('/auth/update', [AuthController::class, 'update']);
 
 Route::post('/information/basic', [BasicInfoController::class, 'store']);
 Route::get('/information/basic', [BasicInfoController::class, 'show']);
