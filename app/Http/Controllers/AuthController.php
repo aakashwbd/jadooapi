@@ -46,7 +46,8 @@ class AuthController extends Controller
                 'message' => 'Successfully logged in...',
                 'data' => [
                     'token' => 'Bearer ' . $accessToken->plainTextToken,
-                    'user' => auth()->user()
+                    'user' => auth()->user()->load(["profile"])
+
                 ]
             ], 200);
         } catch (Exception $e) {
@@ -116,13 +117,21 @@ class AuthController extends Controller
             $profile->nid = request('nid') ?? $profile->nid;
             $profile->birthCertificate = request('birthCertificate') ?? $profile->birthCertificate;
             $profile->passport = request('passport') ?? $profile->passport;
+            $profile->aboutDescripton = request('aboutDescripton') ?? $profile->aboutDescripton;
+            $profile->summaryDescripton = request('summaryDescripton') ?? $profile->summaryDescripton;
+            $profile->addressLabel = request('addressLabel') ?? $profile->addressLabel;
+            $profile->streetAddress = request('streetAddress') ?? $profile->streetAddress;
+            $profile->division = request('division') ?? $profile->division;
+            $profile->district = request('district') ?? $profile->district;
+            // $profile->summaryDescripton = request('summaryDescripton') ?? $profile->summaryDescripton;
             
             $profile->update();
             
             
             return response([
-                'status' => 'success',
-                'message' => 'Profile updated successfully'
+                'status' => 'done',
+                'message' => 'Profile updated successfully',
+                'data' => auth()->user()->load('profile')
             ]);
         }catch(Exception $e){
             return response([

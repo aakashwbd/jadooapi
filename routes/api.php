@@ -23,8 +23,8 @@ Route::post('/auth/logout', [AuthController::class, 'logout']);
 Route::get('/auth/me', [AuthController::class, 'me']);
 Route::patch('/auth/update', [AuthController::class, 'update']);
 
-Route::post('/information/basic', [BasicInfoController::class, 'store']);
-Route::get('/information/basic', [BasicInfoController::class, 'show']);
+// Route::post('/information/basic', [BasicInfoController::class, 'store']);
+// Route::get('/information/basic', [BasicInfoController::class, 'show']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
