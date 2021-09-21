@@ -109,21 +109,23 @@ class AuthController extends Controller
             
             $profile = Profile::where('user_id', $userId)->first();
             
-            $profile->name = request('name') ?? $profile->name;
-            $profile->dob = request('dob') ?? $profile->dob;
-            $profile->bloodGroup = request('bloodGroup') ?? $profile->bloodGroup;
-            $profile->maritialStatus = request('maritialStatus') ?? $profile->maritialStatus;
-            $profile->nationality = request('nationality') ?? $profile->nationality;
-            $profile->nid = request('nid') ?? $profile->nid;
-            $profile->birthCertificate = request('birthCertificate') ?? $profile->birthCertificate;
-            $profile->passport = request('passport') ?? $profile->passport;
-            $profile->aboutDescripton = request('aboutDescripton') ?? $profile->aboutDescripton;
-            $profile->summaryDescripton = request('summaryDescripton') ?? $profile->summaryDescripton;
-            $profile->addressLabel = request('addressLabel') ?? $profile->addressLabel;
-            $profile->streetAddress = request('streetAddress') ?? $profile->streetAddress;
-            $profile->division = request('division') ?? $profile->division;
-            $profile->district = request('district') ?? $profile->district;
-            // $profile->summaryDescripton = request('summaryDescripton') ?? $profile->summaryDescripton;
+            $profile->firstName = request('firstName') ?? $profile->firstName;
+            $profile->lastName = request('lastName') ?? $profile->lastName;
+            $profile->summary = request('summary') ?? $profile->summary;
+            $profile->githubUserName = request('githubUserName') ?? $profile->githubUserName;
+            $profile->linkedinUserName = request('linkedinUserName') ?? $profile->linkedinUserName;
+            $profile->countries = request('countries') ?? $profile->countries;
+            $profile->phones = request('phones') ?? $profile->phones;
+            $profile->role = request('role') ?? $profile->role;
+            $profile->salary = request('salary') ?? $profile->salary;
+            $profile->degree = request('degree') ?? $profile->degree;
+            $profile->institute = request('institute') ?? $profile->institute;
+            $profile->startDate = request('startDate') ?? $profile->startDate;
+            $profile->endDate = request('endDate') ?? $profile->endDate;
+            $profile->educationLabel = request('educationLabel') ?? $profile->educationLabel;
+            $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
+            $profile->skillForm = request('skillForm') ?? $profile->skillForm;
+         
             
             $profile->update();
             
