@@ -84,18 +84,18 @@ class AuthController extends Controller
 
             if ($user) {
                 $profile = Profile::create([
-                    "user_id" => $user->id 
-                    
+                    "user_id" => $user->id
+
                 ]);
             }
 
-        
+
             return response([
                 'status' => 'done',
                 'message' => 'Successfully registered...'
             ], 201);
 
-            
+
         } catch (Exception $e) {
             return response([
                 'status' => 'serverError',
@@ -106,9 +106,9 @@ class AuthController extends Controller
     public function update(){
         try{
             $userId = Auth::id();
-            
+
             $profile = Profile::where('user_id', $userId)->first();
-            
+
             $profile->firstName = request('firstName') ?? $profile->firstName;
             $profile->lastName = request('lastName') ?? $profile->lastName;
             $profile->summary = request('summary') ?? $profile->summary;
@@ -127,12 +127,12 @@ class AuthController extends Controller
             $profile->experiences = request('experiences') ?? $profile->experiences;
             $profile->trainings = request('trainings') ?? $profile->trainings;
             $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
-            $profile->skillForm = request('skillForm') ?? $profile->skillForm;
-         
-            
+            $profile->skills = request('skills') ?? $profile->skills;
+
+
             $profile->update();
-            
-            
+
+
             return response([
                 'status' => 'done',
                 'message' => 'Profile updated successfully',
