@@ -118,11 +118,14 @@ class AuthController extends Controller
             $profile->phones = request('phones') ?? $profile->phones;
             $profile->role = request('role') ?? $profile->role;
             $profile->salary = request('salary') ?? $profile->salary;
-            $profile->degree = request('degree') ?? $profile->degree;
-            $profile->institute = request('institute') ?? $profile->institute;
-            $profile->startDate = request('startDate') ?? $profile->startDate;
-            $profile->endDate = request('endDate') ?? $profile->endDate;
-            $profile->educationLabel = request('educationLabel') ?? $profile->educationLabel;
+            // $profile->degree = request('degree') ?? $profile->degree;
+            // $profile->institute = request('institute') ?? $profile->institute;
+            // $profile->startDate = request('startDate') ?? $profile->startDate;
+            // $profile->endDate = request('endDate') ?? $profile->endDate;
+            // $profile->educationLabel = request('educationLabel') ?? $profile->educationLabel;
+            $profile->educations = request('educations') ?? $profile->educations;
+            $profile->experiences = request('experiences') ?? $profile->experiences;
+            $profile->trainings = request('trainings') ?? $profile->trainings;
             $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
             $profile->skillForm = request('skillForm') ?? $profile->skillForm;
          
