@@ -115,7 +115,7 @@ class AuthController extends Controller
             $profile->githubUserName = request('githubUserName') ?? $profile->githubUserName;
             $profile->linkedinUserName = request('linkedinUserName') ?? $profile->linkedinUserName;
             $profile->countries = request('countries') ?? $profile->countries;
-            $profile->phones = request('phones') ?? $profile->phones;
+            // $profile->phones = request('phones') ?? $profile->phones;
             $profile->role = request('role') ?? $profile->role;
             $profile->salary = request('salary') ?? $profile->salary;
             // $profile->degree = request('degree') ?? $profile->degree;
@@ -128,6 +128,7 @@ class AuthController extends Controller
             $profile->trainings = request('trainings') ?? $profile->trainings;
             $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
             $profile->skills = request('skills') ?? $profile->skills;
+            $profile->phone = request('phone') ?? $profile->phone;
 
 
             $profile->update();
