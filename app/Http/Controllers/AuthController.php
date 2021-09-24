@@ -129,6 +129,8 @@ class AuthController extends Controller
             $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
             $profile->skills = request('skills') ?? $profile->skills;
             $profile->phone = request('phone') ?? $profile->phone;
+            $profile->template = request('template') ?? $profile->template;
+
 
 
             $profile->update();
