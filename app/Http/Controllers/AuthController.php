@@ -62,7 +62,9 @@ class AuthController extends Controller
 
     {
         $validator = Validator::make(request()->all(), [
-            'username' => 'required',
+            // 'username' => 'required',
+        'firstName' => 'required',
+        'lastName' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
 
@@ -77,14 +79,18 @@ class AuthController extends Controller
 
         try {
             $user = User::create([
-                'username' => request('username'),
+                // 'username' => request('username'),
+                // 'firstName' => request('firstName'),
+                // 'lastName' => request('lastName'),
                 'email' => request('email'),
                 'password' => Hash::make(request('password')),
             ]);
 
             if ($user) {
                 $profile = Profile::create([
-                    "user_id" => $user->id
+                    "user_id" => $user->id,
+                    'firstName' => request('firstName'),
+              'lastName' => request('lastName'),
 
                 ]);
             }
@@ -125,6 +131,9 @@ class AuthController extends Controller
             // $profile->educationLabel = request('educationLabel') ?? $profile->educationLabel;
             $profile->educations = request('educations') ?? $profile->educations;
             $profile->experiences = request('experiences') ?? $profile->experiences;
+            $profile->languages = request('languages') ?? $profile->languages;
+            $profile->certifications = request('certifications') ?? $profile->certifications;
+
             $profile->trainings = request('trainings') ?? $profile->trainings;
             $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
             $profile->skills = request('skills') ?? $profile->skills;
