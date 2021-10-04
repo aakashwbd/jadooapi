@@ -116,32 +116,28 @@ class AuthController extends Controller
             $profile = Profile::where('user_id', $userId)->first();
 
             $profile->firstName = request('firstName') ?? $profile->firstName;
-            $profile->lastName = request('lastName') ?? $profile->lastName;
-            $profile->summary = request('summary') ?? $profile->summary;
-            $profile->githubUserName = request('githubUserName') ?? $profile->githubUserName;
-            $profile->linkedinUserName = request('linkedinUserName') ?? $profile->linkedinUserName;
-            $profile->countries = request('countries') ?? $profile->countries;
-            // $profile->phones = request('phones') ?? $profile->phones;
-            $profile->role = request('role') ?? $profile->role;
-            $profile->salary = request('salary') ?? $profile->salary;
-            // $profile->degree = request('degree') ?? $profile->degree;
-            // $profile->institute = request('institute') ?? $profile->institute;
-            // $profile->startDate = request('startDate') ?? $profile->startDate;
-            // $profile->endDate = request('endDate') ?? $profile->endDate;
-            // $profile->educationLabel = request('educationLabel') ?? $profile->educationLabel;
-            $profile->educations = request('educations') ?? $profile->educations;
-            $profile->experiences = request('experiences') ?? $profile->experiences;
-            $profile->languages = request('languages') ?? $profile->languages;
-            $profile->certifications = request('certifications') ?? $profile->certifications;
-            $profile->projects = request('projects') ?? $profile->projects;
+            $profile->lastName = request('lastName');
+            $profile->summary = request('summary') ;
+            $profile->githubUserName = request('githubUserName') ;
+            $profile->linkedinUserName = request('linkedinUserName') ;
+            $profile->countries = request('countries') ;
+      
+            $profile->role = request('role') ;
+            $profile->salary = request('salary') ;
+ 
+            $profile->educations = request('educations') ;
+            $profile->experiences = request('experiences') ;
+            $profile->languages = request('languages') ;
+            $profile->certifications = request('certifications') ;
+            $profile->projects = request('projects') ;
 
-            $profile->trainings = request('trainings') ?? $profile->trainings;
-            $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
-            $profile->selectTemplate = request('selectTemplate') ?? $profile->selectTemplate;
+            $profile->trainings = request('trainings') ;
+            $profile->fullTimeJob = request('fullTimeJob');
+            $profile->selectTemplate = request('selectTemplate');
             
-            $profile->skills = request('skills') ?? $profile->skills;
-            $profile->phone = request('phone') ?? $profile->phone;
-            $profile->template = request('template') ?? $profile->template;
+            $profile->skills = request('skills');
+            $profile->phone = request('phone') ;
+            $profile->template = request('template');
 
 
 
