@@ -116,28 +116,41 @@ class AuthController extends Controller
             $profile = Profile::where('user_id', $userId)->first();
 
             $profile->firstName = request('firstName') ?? $profile->firstName;
-            $profile->lastName = request('lastName');
-            $profile->summary = request('summary') ;
-            $profile->githubUserName = request('githubUserName') ;
-            $profile->linkedinUserName = request('linkedinUserName') ;
-            $profile->countries = request('countries') ;
-      
-            $profile->role = request('role') ;
-            $profile->salary = request('salary') ;
- 
-            $profile->educations = request('educations') ;
-            $profile->experiences = request('experiences') ;
-            $profile->languages = request('languages') ;
-            $profile->certifications = request('certifications') ;
-            $profile->projects = request('projects') ;
-
-            $profile->trainings = request('trainings') ;
-            $profile->fullTimeJob = request('fullTimeJob');
-            $profile->selectTemplate = request('selectTemplate');
+        
+            $profile->lastName = request('lastName') ?? $profile->lastName;
+            $profile->summary = request('summary') ?? $profile->summary;
+            $profile->githubUserName = request('githubUserName') ?? $profile->githubUserName ;
+            $profile->linkedinUserName = request('linkedinUserName') ?? $profile->linkedinUserName ;
+            $profile->countries = request('countries') ?? $profile->countries ;
             
-            $profile->skills = request('skills');
-            $profile->phone = request('phone') ;
-            $profile->template = request('template');
+            if (request()->has('image')) {
+                $file = request()->file('image');
+                   $upload_url = cloudinary()->upload($file->getRealPath(), [
+                   'folder' => 'portfolio/images/' . request('folder'),
+                   'public_id' => Str::random(10),
+                   'overwrite' => true,
+                   'resource_type' => 'auto'
+                ])->getSecurePath();
+
+                $profile->image = $upload_url  ?? $profile->image;
+            }
+      
+            $profile->role = request('role') ?? $profile->role ;
+            $profile->salary = request('salary') ?? $profile->salary ;
+ 
+            $profile->educations = request('educations') ?? $profile->educations ;
+            $profile->experiences = request('experiences') ?? $profile->experiences ;
+            $profile->languages = request('languages') ?? $profile->languages ;
+            $profile->certifications = request('certifications') ?? $profile->certifications ;
+            $profile->projects = request('projects') ?? $profile->projects ;
+
+            $profile->trainings = request('trainings') ?? $profile->trainings ;
+            $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
+            $profile->selectTemplate = request('selectTemplate') ?? $profile->selectTemplate;
+            
+            $profile->skills = request('skills') ?? $profile->skills;
+            $profile->phone = request('phone') ?? $profile->phone ;
+            $profile->template = request('template') ?? $profile->template;
 
 
 
@@ -156,6 +169,7 @@ class AuthController extends Controller
             ]);
         }
     }
+
     public function logout()
     {
         try {
