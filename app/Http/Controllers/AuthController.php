@@ -63,8 +63,8 @@ class AuthController extends Controller
     {
         $validator = Validator::make(request()->all(), [
             // 'username' => 'required',
-        'firstName' => 'required',
-        'lastName' => 'required',
+            'firstName' => 'required',
+            'lastName' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
 
@@ -122,6 +122,12 @@ class AuthController extends Controller
             $profile->githubUserName = request('githubUserName') ?? $profile->githubUserName ;
             $profile->linkedinUserName = request('linkedinUserName') ?? $profile->linkedinUserName ;
             $profile->countries = request('countries') ?? $profile->countries ;
+
+
+            // $profile->clientName = request('clientName') ?? $profile->clientName ;
+            // $profile->clientContactNo = request('clientContactNo') ?? $profile->clientContactNo ;
+            // $profile->clientEmail = request('clientEmail') ?? $profile->clientEmail ;
+            // $profile->clientMsg = request('clientMsg') ?? $profile->clientMsg ;
             
             if (request()->has('image')) {
                 $file = request()->file('image');
@@ -137,6 +143,7 @@ class AuthController extends Controller
       
             $profile->role = request('role') ?? $profile->role ;
             $profile->salary = request('salary') ?? $profile->salary ;
+           
  
             $profile->educations = request('educations') ?? $profile->educations ;
             $profile->experiences = request('experiences') ?? $profile->experiences ;
@@ -145,6 +152,9 @@ class AuthController extends Controller
             $profile->projects = request('projects') ?? $profile->projects ;
 
             $profile->trainings = request('trainings') ?? $profile->trainings ;
+
+            $profile->clientForms = request('clientForms') ?? $profile->clientForms ;
+
             $profile->fullTimeJob = request('fullTimeJob') ?? $profile->fullTimeJob;
             $profile->selectTemplate = request('selectTemplate') ?? $profile->selectTemplate;
             
