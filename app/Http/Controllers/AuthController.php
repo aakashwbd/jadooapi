@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use App\Models\Profile;
+use App\Models\Contact;
 
 
 class AuthController extends Controller
 {
      public function __construct()
     {
-        $this->middleware(['auth:sanctum'], ['only' => ['logout', 'me', 'update']]);
+        $this->middleware(['auth:sanctum'], ['only' => ['logout', 'me', 'update', 'contactMsg']]);
     }
 
     public function login()
@@ -90,7 +91,7 @@ class AuthController extends Controller
                 $profile = Profile::create([
                     "user_id" => $user->id,
                     'firstName' => request('firstName'),
-              'lastName' => request('lastName'),
+                    'lastName' => request('lastName'),
 
                 ]);
             }
@@ -201,9 +202,62 @@ class AuthController extends Controller
         try {
             return response([
                 'status' => 'done',
-                'data' => auth()->user()->load('profile')
+                'data' => auth()->user()->load(['profile', 'contacts'])
             ], 200);
         } catch (Exception $e) {
+            return response([
+                'status' => 'serverError',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function show($id)
+    {
+        try {
+            $user = User::with(['profile'])->where('_id', $id)->first();
+
+            return response([
+                'status' => 'done',
+                'data' =>  $user
+                
+            ], 200);
+        } catch (Exception $e) {
+            return response([
+                'status' => 'serverError',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+    public function contactMsg(){
+        // dd(request()->all());
+        try{
+            $userId = Auth::id();
+
+            $contacts = Contact::create([
+                "clientName"=>request('clientName'),
+                "clientContactNo"=>request('clientContactNo'),
+                "clientEmail"=>request('clientEmail'),
+                "clientMsg"=>request('clientMsg'),
+                'user_id'=>$userId
+            ]);
+
+         if($contacts){
+            return response([
+                'status' => 'done',
+                'message' => 'contact msg successfully',
+                'data' => $contacts
+            ]);
+         }
+         
+
+
+
+            // $profile->update();
+
+
+           
+        }catch(Exception $e){
             return response([
                 'status' => 'serverError',
                 'message' => $e->getMessage()

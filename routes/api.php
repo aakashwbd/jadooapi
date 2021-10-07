@@ -19,8 +19,10 @@ use App\Http\Controllers\BasicInfoController;
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
+Route::post('/auth/contact', [AuthController::class, 'contactMsg']);
 
 Route::get('/auth/me', [AuthController::class, 'me']);
+Route::get('/auth/user/{id}', [AuthController::class, 'show']);
 Route::patch('/auth/update', [AuthController::class, 'update']);
 
 // Route::post('/information/basic', [BasicInfoController::class, 'store']);

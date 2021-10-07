@@ -44,5 +44,8 @@ class User extends Authenticatable
     ];
     public function profile(){
         return $this->hasOne (Profile::class);
+    } 
+     public function contacts(){
+        return $this->hasMany (Contact::class);
     }
 }
